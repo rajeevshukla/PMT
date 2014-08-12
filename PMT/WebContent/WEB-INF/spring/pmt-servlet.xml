@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:int-security="http://www.springframework.org/schema/integration/security"
-	xmlns:mvc="http://www.springframework.org/schema/mvc" 
-	xmlns:security="http://www.springframework.org/schema/security" 
-	xmlns:util="http://www.springframework.org/schema/util" 
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:util="http://www.springframework.org/schema/util"
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans 
 		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
@@ -52,22 +50,6 @@
 		</property>
 	</bean>
 
-
-	<!-- <amq:broker start="true" useJmx="true"> -->
-	<!-- <amq:transportConnectors > -->
-	<!-- <amq:transportConnector uri="tcp://192.168.2.108:4321"></amq:transportConnector> -->
-	<!-- </amq:transportConnectors> -->
-	<!-- </amq:broker> -->
-
-	<!-- <amq:connectionFactory id="tabkidConnectionFactory"> -->
-	<!-- </amq:connectionFactory> -->
-
-	<!-- <amq:topic id="tabkidStudentTopic" name="TabkidStudentTopic" physicalName="studentTopic"></amq:topic> -->
-
-
-
-
-
 	<!-- ================================================================================================= -->
 	<!-- Scheduler -->
 	<!-- ================================================================================================= -->
@@ -85,21 +67,44 @@
 	<!-- ================================================================================================= -->
 	<!--Email Configuration -->
 	<!-- ================================================================================================= -->
-	<!-- <bean id="tabkidsEmailService" class="com.pensar.tabkids.service.TabkidsEmailService"> 
-		<property name="mailSender" ref="mailSender"/> <property name="velocityEngine" 
-		ref="velocityEngine"/> </bean> <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"> 
-		<property name="host" value="smtp.gmail.com" /> <property name="session" 
-		ref="mailSession"></property> </bean> <bean id="mailSession" class="javax.mail.Session"> 
-		<constructor-arg> <props> <prop key="mail.smtp.starttls.enable">true</prop> 
-		<prop key="mail.smtp.starttls.required">true</prop> <prop key="mail.smtp.auth">true</prop> 
-		<prop key="mail.transport.protocol">smtp</prop> <prop key="mail.smtp.port">25</prop> 
-		<prop key="mail.smtp.socketFactory.port">465</prop> <prop key="mail.smtp.socketFactory.class"> 
-		javax.net.ssl.SSLSocketFactory </prop> <prop key="mail.smtp.socketFactory.fallback"> 
-		false </prop> <prop key="mail.smtp.socketFactory.port">25</prop> </props> 
-		</constructor-arg> <constructor-arg ref="emailAuthenticator" /> </bean> <bean 
-		id="emailAuthenticator" class="com.pensar.tabkids.service.TabkidsEmailAuthenticator"> 
-		<constructor-arg value="${mail.userName}" /> <constructor-arg value="${mail.password}"/> 
-		</bean> <bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean"> 
-		<property name="velocityProperties"> <value> resource.loader=class class.resource.loader.class=org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader 
-		</value> </property> </bean> -->
+	<bean id="tabkidsEmailService" class="com.devstringx.pmt.mail.PmtEmailService">
+		<property name="mailSender" ref="mailSender" />
+		<property name="velocityEngine" ref="velocityEngine" />
+	</bean>
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="session" ref="mailSession"></property>
+	</bean>
+	<bean id="mailSession" class="javax.mail.Session">
+		<constructor-arg>
+			<props>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.smtp.starttls.required">true</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.port">25</prop>
+				<prop key="mail.smtp.socketFactory.port">465</prop>
+				<prop key="mail.smtp.socketFactory.class">
+					javax.net.ssl.SSLSocketFactory
+				</prop>
+				<prop key="mail.smtp.socketFactory.fallback">
+					false
+				</prop>
+				<prop key="mail.smtp.socketFactory.port">25</prop>
+			</props>
+		</constructor-arg>
+		<constructor-arg ref="emailAuthenticator" />
+	</bean>
+	<bean id="emailAuthenticator" class="com.devstringx.pmt.mail.EmailAuthenticator">
+		<constructor-arg value="${mail.userName}" />
+		<constructor-arg value="${mail.password}" />
+	</bean>
+	<bean id="velocityEngine"
+		class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+		<property name="velocityProperties">
+			<value> resource.loader=class
+				class.resource.loader.class=org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+			</value>
+		</property>
+	</bean>
 </beans>
