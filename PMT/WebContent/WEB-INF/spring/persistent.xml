@@ -27,7 +27,7 @@
 		</property>
 		<property name="packagesToScan">
 			<list>
-				<value>com.pensar.tabkids</value>
+				<value>com.devstringx.pmt</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">

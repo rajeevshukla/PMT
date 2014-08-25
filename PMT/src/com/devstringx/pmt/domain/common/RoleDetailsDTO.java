@@ -19,14 +19,6 @@ public class RoleDetailsDTO implements GrantedAuthority {
 	private static final long serialVersionUID = 4976542322975844498L;
 	private String roleDesc;
 	private String roleId;
-	private int rolePriority;
-
-	
-	
-	
-	public RoleDetailsDTO() {
-
-	}
 
 	public RoleDetailsDTO(String roleDesc, String roleId) {
 		super();
@@ -44,10 +36,6 @@ public class RoleDetailsDTO implements GrantedAuthority {
 	public String getRoleDesc() {
 		return roleDesc;
 	}
-   @Column(name="ROLE_PRIORITY",nullable=false)
-	public int getRolePriority() {
-		return rolePriority;
-	}
 	public void setRoleDesc(String roleDesc) {
 		this.roleDesc = roleDesc;
 	}
@@ -64,16 +52,14 @@ public class RoleDetailsDTO implements GrantedAuthority {
 	public void setAuthority(String roleId){
 		this.setRoleId(roleId);
 	}
-	
-	public void setRolePriority(int rolePriority) {
-		this.rolePriority = rolePriority;
-	}
 
 	@Override
 	public String toString() {
 		return "RoleDetailsDTO [roleDesc=" + roleDesc + ", roleId=" + roleId
-				+ ", rolePriority=" + rolePriority + "]";
+				+ "]";
 	}
+
+	
 
 	
 }

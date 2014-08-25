@@ -1,4 +1,4 @@
-package com.devstringx.web;
+package com.devstringx.pmt.web.admin;
 
 import javax.annotation.PostConstruct;
 
