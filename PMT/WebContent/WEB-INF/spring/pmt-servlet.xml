@@ -124,9 +124,9 @@
 		</property>
 		<property name="order" value="1"></property>
 	</bean>
-	<bean id="tilesViewResolver" class="org.springframework.js.ajax.AjaxUrlBasedViewResolver">
+	<!-- <bean id="tilesViewResolver" class="org.springframework.js.ajax.AjaxUrlBasedViewResolver">
 		<property name="viewClass"
 			value="org.springframework.webflow.mvc.view.FlowAjaxTilesView" />
 		<property name="order" value="0"></property>
-	</bean>
+	</bean> -->
 </beans>
