@@ -6,11 +6,11 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<properties>
-	<hibernate.version>4.3.6.Final</hibernate.version>
-	 <spring.version>4.1.0.RELEASE</spring.version>
-	 <spring.security.version>4.0.0.CI-SNAPSHOT</spring.security.version>
+		<hibernate.version>4.3.6.Final</hibernate.version>
+		<spring.version>4.1.0.RELEASE</spring.version>
+		<spring.security.version>4.0.0.CI-SNAPSHOT</spring.security.version>
 	</properties>
-	
+
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<plugins>
@@ -31,9 +31,9 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		
+
 	</build>
-	
+
 	<dependencies>
 		<!-- <dependency> <groupId>javax.servlet</groupId> <artifactId>servlet-api</artifactId> 
 			<version>3.0-alpha-1</version> </dependency> -->
@@ -188,17 +188,24 @@
 			<groupId>org.slf4j</groupId>
 			<version>1.5.11</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20140107</version>
+		</dependency>
 	</dependencies>
-	
+
+
 	<repositories>
-    <repository>
-        <id>spring-snapshots</id>
-        <name>Spring Snapshots</name>
-        <url>http://repo.spring.io/snapshot</url>
-        <snapshots>
-            <enabled>true</enabled>
-        </snapshots>
-    </repository>
-</repositories>
+		<repository>
+			<id>spring-snapshots</id>
+			<name>Spring Snapshots</name>
+			<url>http://repo.spring.io/snapshot</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
 
 </project>

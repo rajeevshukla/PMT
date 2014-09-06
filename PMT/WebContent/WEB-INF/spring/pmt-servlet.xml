@@ -15,7 +15,7 @@
 		http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
 		http://www.springframework.org/schema/util 
 		http://www.springframework.org/schema/util/spring-util-4.0.xsd">
-	<!-- <import resource="persistent.xml" /> -->
+	 <import resource="persistent.xml" /> 
 	<context:component-scan base-package="com.devstringx"></context:component-scan>
 	<mvc:annotation-driven />
 	<bean id="validator"
@@ -67,7 +67,7 @@
 	<!-- ================================================================================================= -->
 	<!--Email Configuration -->
 	<!-- ================================================================================================= -->
-	<bean id="tabkidsEmailService" class="com.devstringx.pmt.mail.PmtEmailService">
+	<bean id="pmtEmailService" class="com.devstringx.pmt.mail.PmtEmailService">
 		<property name="mailSender" ref="mailSender" />
 		<property name="velocityEngine" ref="velocityEngine" />
 	</bean>
@@ -82,7 +82,7 @@
 				<prop key="mail.smtp.starttls.required">true</prop>
 				<prop key="mail.smtp.auth">true</prop>
 				<prop key="mail.transport.protocol">smtp</prop>
-				<prop key="mail.smtp.port">25</prop>
+			<!-- 	<prop key="mail.smtp.port">25</prop> -->
 				<prop key="mail.smtp.socketFactory.port">465</prop>
 				<prop key="mail.smtp.socketFactory.class">
 					javax.net.ssl.SSLSocketFactory
@@ -90,7 +90,7 @@
 				<prop key="mail.smtp.socketFactory.fallback">
 					false
 				</prop>
-				<prop key="mail.smtp.socketFactory.port">25</prop>
+				<!-- <prop key="mail.smtp.socketFactory.port">25</prop> -->
 			</props>
 		</constructor-arg>
 		<constructor-arg ref="emailAuthenticator" />

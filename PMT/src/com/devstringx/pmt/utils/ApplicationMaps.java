@@ -1,5 +1,8 @@
 package com.devstringx.pmt.utils;
 
-public class ApplicationMaps {
+import java.util.Properties;
 
+public class ApplicationMaps {
+public static 	Properties PMT_PROPERTIES=new Properties();
+	
 }

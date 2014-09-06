@@ -221,7 +221,7 @@ public class UserDetailsDTO extends CommonDetailsDTO implements UserDetails {
 	@ManyToMany(targetEntity = RoleDetailsDTO.class, 
 			cascade = CascadeType.DETACH)
 	@Fetch(FetchMode.JOIN)
-	@JoinTable(name = "user_role_mapping",
+	@JoinTable(name = "USER_ROLE_MAPPING",
 	joinColumns = @JoinColumn(name = "URM_USER_ID"), 
 	inverseJoinColumns = @JoinColumn(name = "URM_ROLE_ID"))
 	public Collection<GrantedAuthority> getAuthorities() {

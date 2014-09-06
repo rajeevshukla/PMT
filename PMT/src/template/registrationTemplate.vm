@@ -1,0 +1,18 @@
+ <html>
+
+ <body>
+    Dear ${userName} ,
+    <p>
+     Welcome to out defect management tools. We provide  tracking the logged defects in a product 
+     from beginning to closure (by inspection, testing, or recording feedback from customers),
+     and making new versions of the product that fix the defects. 
+     </p>
+     <p>
+       Here is your verification url : ${verficationURL}
+     </p>  
+    <br>
+    <br>
+    Best Regards, <br>
+    Defect team  
+ </body>
+ </html>
