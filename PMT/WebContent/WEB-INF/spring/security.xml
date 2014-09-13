@@ -1,24 +1,139 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns:security="http://www.springframework.org/schema/security"
-    xmlns="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-    xmlns:tx="http://www.springframework.org/schema/tx"
-    xmlns:context="http://www.springframework.org/schema/context"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans 
-    					http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    					http://www.springframework.org/schema/beans/spring-beans.xsd
     					http://www.springframework.org/schema/context 
-						http://www.springframework.org/schema/context/spring-context-4.0.xsd
+						http://www.springframework.org/schema/context/spring-context.xsd
                         http://www.springframework.org/schema/security 
-                        http://www.springframework.org/schema/security/spring-security-4.0.xsd 
+                        http://www.springframework.org/schema/security/spring-security.xsd 
                         http://www.springframework.org/schema/tx 
-                        http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
- 
- 
-                       
-                        
-                        
-                        
-                        
-                        
-                        
-                        </beans>
+                        http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<security:http auto-config="true" security="none"
+		pattern="/resources/**" />
+	<security:http auto-config="true" security="none"
+		pattern="/common/**" />
+	<security:http auto-config="true" security="none"
+		pattern="/login.htm" />
+	<security:http auto-config="true" security="none"
+		pattern="/sessionExpired.htm" />
+	<security:http auto-config="true" security="none"
+		pattern="/logout.htm" />
+	
+
+
+
+	<security:http auto-config="true"><!-- <security:intercept-url pattern="/student/**" 
+			access="ROLE_STUDENT"/> --><!-- <security:intercept-url pattern="/teacher/**" 
+			access="ROLE_TEACHER"/> --><!-- <security:intercept-url pattern="/admin/**" 
+			access="ROLE_ADMIN" /> -->
+		<security:intercept-url pattern="/*"
+			access="ROLE_ADMIN" />
+		<security:session-management 	invalid-session-url="/sessionExpired.htm">
+			<security:concurrency-control 	expired-url="/sessionExpired.htm" max-sessions="2" 	error-if-maximum-exceeded="true" />
+		</security:session-management>
+
+		<security:logout invalidate-session="true" 	success-handler-ref="customLogoutSuccessHandler" delete-cookies="JSESSIONID" />
+		<security:form-login always-use-default-target="true" authentication-failure-handler-ref="customAuthFailureHandler"
+			authentication-success-handler-ref="customAuthSuccessHandler" 	login-page="/login.htm" />
+	</security:http>
+	<security:authentication-manager alias="authenticationManager">
+		<security:authentication-provider 
+			ref="authProvider">
+		</security:authentication-provider>
+	</security:authentication-manager>
+	<bean id="authProvider"
+		class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+		<property name="userDetailsService" ref="authenticationService">
+		</property>
+		<property name="passwordEncoder" ref="passwordEncoder" />
+	</bean>
+	<bean id="passwordEncoder"
+		class="org.springframework.security.authentication.encoding.ShaPasswordEncoder">
+		<constructor-arg value="256" />
+	</bean>
+	<bean id="authenticationService"
+		class="com.devstringx.pmt.service.security.AuthenticationService">
+		<property name="authenticationDAO" ref="authenticationDAO" />
+	</bean>
+	<bean id="authenticationDAO"
+		class="com.devstringx.pmt.persistence.security.AuthenticationDAO">
+		<property name="sessionFactory" ref="secSessionFactory" />
+	</bean>
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<constructor-arg index="0" value="${${db.dbType}.driverClass}" />
+		<property name="driverClassName">
+			<value>${${db.dbType}.driverClass}</value>
+		</property>
+		<property name="url">
+			<value>${${db.dbType}.connectionUrl}</value>
+		</property>
+		<property name="username">
+			<value>${${db.dbType}.username}</value>
+		</property>
+		<property name="password">
+			<value>${${db.dbType}.password}</value>
+		</property>
+	</bean>
+	<bean id="webSecurityExpressionHandler"
+		class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" />
+	<bean id="secSessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource">
+		</property>
+		<property name="packagesToScan">
+			<list>
+				<value>com.devstringx.pmt</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props><!-- <prop key="hibernate.connection.datasource">java:/comp/env/jdbc/DB2</prop> -->
+				<prop key="hibernate.dialect">${${db.dbType}.dialect}</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<!-- <prop key="hibernate.current_session_context_class">thread</prop> -->
+				<prop key="hibernate.format_sql">true</prop>
+			<!-- <prop key="hibernate.c3p0.min_size">5</prop> 
+			<prop key="hibernate.c3p0.max_size">20</prop> <prop key="hibernate.c3p0.timeout">1800</prop> 
+			<prop key="hibernate.c3p0.max_statements">50</prop> -->
+			</props>
+		</property>
+	</bean>
+	<bean id="placeholderConfig"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:tabkids.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
+
+	<bean id="authenticationFilter"
+		class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter">
+		<property name="authenticationManager" ref="authenticationManager" />
+		<property name="filterProcessesUrl" value="/j_spring_security_check" />
+		<property name="authenticationSuccessHandler" ref="customAuthSuccessHandler" />
+	</bean>
+
+	<bean id="customAuthSuccessHandler"
+		class="com.devstringx.pmt.service.security.CustomAuthenticationSuccessHandler">
+	</bean>
+
+	<bean id="customAuthFailureHandler"
+		class="com.devstringx.pmt.service.security.CustomAuthenticationFailureHandler">
+		<property name="defaultFailureUrl" value="/login.htm?login_error=1" />
+	</bean>
+	<bean id="customLogoutSuccessHandler"
+		class="com.devstringx.pmt.service.security.CustomLogoutSuccessHandler">
+		<property name="defaultTargetUrl" value="/login.htm" />
+	</bean>
+
+
+
+
+</beans>
