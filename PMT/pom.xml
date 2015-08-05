@@ -39,8 +39,8 @@
 					<path>/${project.build.finalName}</path>
 					<update>true</update>
 					<url>http://localhost:8080/manager/text</url>
-					<username>tomcat</username>
-					<password>tomcatuser</password>
+					<username>tomcat8</username>
+					<password>tomcat8</password>
 				</configuration>
 			</plugin>
 		</plugins>
