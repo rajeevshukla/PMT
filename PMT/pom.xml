@@ -5,6 +5,7 @@
 	<artifactId>PMT</artifactId>
 	<version>1.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
+	
 	<properties>
 	    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<hibernate.version>4.3.6.Final</hibernate.version>
@@ -27,6 +28,7 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.4</version>
 				<configuration>
+				    
 					<warSourceDirectory>WebContent</warSourceDirectory>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
@@ -36,11 +38,11 @@
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<version>2.2</version>
 				<configuration>
-					<path>/${project.build.finalName}</path>
+					<path>/PMT</path>
 					<update>true</update>
-					<url>http://localhost:8080/manager/text</url>
-					<username>tomcat8</username>
-					<password>tomcat8</password>
+					<url>http://localhost:8080/manager</url>
+					<username>admin</username>
+					<password>password</password>
 				</configuration>
 			</plugin>
 		</plugins>
