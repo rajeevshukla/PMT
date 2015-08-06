@@ -5,14 +5,14 @@
 	<artifactId>PMT</artifactId>
 	<version>1.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	
+
 	<properties>
-	    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<hibernate.version>4.3.6.Final</hibernate.version>
 		<spring.version>4.1.0.RELEASE</spring.version>
-		<spring.security.version>4.0.0.CI-SNAPSHOT</spring.security.version>
+		<spring.security.version>4.0.2.RELEASE</spring.security.version>
 	</properties>
- 
+
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<plugins>
@@ -28,7 +28,6 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.4</version>
 				<configuration>
-				    
 					<warSourceDirectory>WebContent</warSourceDirectory>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
@@ -40,9 +39,9 @@
 				<configuration>
 					<path>/PMT</path>
 					<update>true</update>
-					<url>http://localhost:8080/manager</url>
-					<username>admin</username>
-					<password>password</password>
+					<url>http://localhost:8080/manager/text</url>
+					<!-- TomcatServer is defined in maven setting -->
+					<server>TomcatServer</server>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -50,10 +49,6 @@
 	</build>
 
 	<dependencies>
-		<!-- <dependency> <groupId>javax.servlet</groupId> <artifactId>servlet-api</artifactId> 
-			<version>3.0-alpha-1</version> </dependency> -->
-
-
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
@@ -64,21 +59,16 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-
-		<!-- <dependency> <groupId>org.springframework</groupId> <artifactId>spring-asm</artifactId> 
-			<version>3.1.4.RELEASE</version> </dependency> -->
-
-
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<version>${hibernate.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-web</artifactId>
-			<version>${spring.security.version}</version>
-		</dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-web</artifactId>
+        <version>${spring.security.version}</version>
+    </dependency>
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
@@ -209,18 +199,15 @@
 			<artifactId>json</artifactId>
 			<version>20140107</version>
 		</dependency>
+		<!-- Adding below dependecy in mandatory because going to use maven tomcat
+			deployment -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
-
-	<repositories>
-		<repository>
-			<id>spring-snapshots</id>
-			<name>Spring Snapshots</name>
-			<url>http://repo.spring.io/snapshot</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
 
 </project>
