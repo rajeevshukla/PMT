@@ -11,6 +11,14 @@
 		<hibernate.version>4.3.6.Final</hibernate.version>
 		<spring.version>4.1.0.RELEASE</spring.version>
 		<spring.security.version>4.0.2.RELEASE</spring.security.version>
+		<servlet.version>3.1.0</servlet.version>
+		<jstl.version>1.2</jstl.version>
+		<mysql.connector.version>5.1.31</mysql.connector.version>
+		<tiles.version>2.2.2</tiles.version>
+		<tomcat.deploy.url>http://localhost:8080/manager/text</tomcat.deploy.url>
+		<tomcat.update.war>true</tomcat.update.war>
+		<tomcat.project.context.path>/PMT</tomcat.project.context.path>
+		<tomcat.server.setting.name>TomcatServer</tomcat.server.setting.name>
 	</properties>
 
 	<build>
@@ -20,6 +28,7 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.1</version>
 				<configuration>
+					<failOnError>true</failOnError>
 					<source>1.6</source>
 					<target>1.6</target>
 				</configuration>
@@ -29,7 +38,7 @@
 				<version>2.4</version>
 				<configuration>
 					<warSourceDirectory>WebContent</warSourceDirectory>
-					<failOnMissingWebXml>false</failOnMissingWebXml>
+					<failOnMissingWebXml>true</failOnMissingWebXml>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -37,11 +46,11 @@
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<version>2.2</version>
 				<configuration>
-					<path>/PMT</path>
-					<update>true</update>
-					<url>http://localhost:8080/manager/text</url>
+					<path>${tomcat.project.context.path}</path>
+					<update>${tomcat.update.war}</update>
+					<url>${tomcat.deploy.url}</url>
 					<!-- TomcatServer is defined in maven setting -->
-					<server>TomcatServer</server>
+					<server>${tomcat.server.setting.name}</server>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -65,10 +74,10 @@
 			<version>${hibernate.version}</version>
 		</dependency>
 		<dependency>
-        <groupId>org.springframework.security</groupId>
-        <artifactId>spring-security-web</artifactId>
-        <version>${spring.security.version}</version>
-    </dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
@@ -109,22 +118,22 @@
 		<dependency>
 			<groupId>org.apache.tiles</groupId>
 			<artifactId>tiles-api</artifactId>
-			<version>2.2.2</version>
+			<version>${tiles.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.tiles</groupId>
 			<artifactId>tiles-core</artifactId>
-			<version>2.2.2</version>
+			<version>${tiles.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.tiles</groupId>
 			<artifactId>tiles-jsp</artifactId>
-			<version>2.2.2</version>
+			<version>${tiles.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.tiles</groupId>
 			<artifactId>tiles-servlet</artifactId>
-			<version>2.2.2</version>
+			<version>${tiles.version}</version>
 		</dependency>
 
 		<dependency>
@@ -145,7 +154,7 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.31</version>
+			<version>${mysql.connector.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.mail</groupId>
@@ -155,7 +164,7 @@
 		<dependency>
 			<groupId>jstl</groupId>
 			<artifactId>jstl</artifactId>
-			<version>1.2</version>
+			<version>${jstl.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -199,12 +208,12 @@
 			<artifactId>json</artifactId>
 			<version>20140107</version>
 		</dependency>
-		<!-- Adding below dependecy in mandatory because going to use maven tomcat
+		<!-- Adding below dependecy in mandatory because going to use maven tomcat 
 			deployment -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
-			<version>3.1.0</version>
+			<version>${servlet.version}</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
