@@ -8,4 +8,4 @@ It also contains tiles 2.0 configuration.
 
 Future Enhancement 
 === 
-   Spring social Integration with Facebook and Linkedin and Twitter very soon 
+   Spring social Integration with Facebook and Linkedin and Twitter very soon. Stay tuned !! :) 
